@@ -1,36 +1,27 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <title>JavaScript Refresher</title>
-  <link rel="stylesheet" href="assets/styles/main.css" />
-  <meta charset="UTF-8" />
-  <!-- No script tag indicates that user has to enable javascript in the browser other javascript based applications won't work -->
-  <!-- defer ensures that js file gets downloaded after the html is completely downloaded -->
-  <!-- <script src="assets/scripts/app.js" defer></script> -->
-  <!-- Javascript file can also be imported as a module -->
-  <!-- When module is added make sure to import the module -->
-   <!-- JSX - javascript code written in html code makes up jsx -->
-  <script src="assets/scripts/app.js" type="module"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Label and Input in Same Row</title>
 </head>
-
 <body>
-  <header>
-    <img src="assets/images/js-logo-xs.png" alt="JavaScript logo" />
-    <h1>JavaScript Refresher</h1>
-  </header>
 
-  <ul>
-    <li>Base Syntax & Rules</li>
-    <li>Variables, Values & Operators</li>
-    <li>Functions</li>
-    <li>Objects</li>
-    <li>Arrays</li>
-    <li>Control Structures</li>
-    <li>Browser APIs & The DOM</li>
-    <li>Essential Features Used By React</li>
-    <li>Tricky Parts</li>
-  </ul>
+<div class="container mt-4">
+  <!-- Form Group with Flexbox -->
+  <div class="d-flex align-items-center mb-3">
+    <label for="name" class="me-2">Name:</label>
+    <input type="text" id="name" class="form-control" placeholder="Enter your name">
+  </div>
+  
+  <!-- Another Form Group with Flexbox -->
+  <div class="d-flex align-items-center mb-3">
+    <label for="email" class="me-2">Email:</label>
+    <input type="email" id="email" class="form-control" placeholder="Enter your email">
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
