@@ -1,5 +1,6 @@
-import reactImg from "./assets/react-core-concepts.png";
 import componentsImg from "./assets/components.png";
+import Header from "./components/Header/Header.jsx";
+import CoreConcept from "./components/CoreConcept.jsx";
 import { CORE_CONCEPTS } from "./data.js";
 
 export const userData = {
@@ -8,7 +9,6 @@ export const userData = {
   title: "Developer", // feel free to replace the title value
 };
 
-const reactDescriptions = ["Fundamental", "Crucial", "Core"];
 
 export function User() {
   return (
@@ -18,56 +18,6 @@ export function User() {
         <p>{userData.title}</p>
       </h2>
     </div>
-  );
-}
-
-function getRandomInt(max) {
-  return Math.floor(Math.random() * (max + 1));
-}
-
-function Header() {
-  const description = reactDescriptions[getRandomInt(2)];
-
-  return (
-    <header>
-      {/* <img src="src/assets/react-core-concepts.png" alt="Stylized atom" /> */}
-      <img src={reactImg} alt="Stylized atom" />
-      <h1>React Essentials</h1>
-      <p>
-        {/* // {} indicates a dynamic value can be added between the curly braces, only expressions are allowed there */}
-        {/* {reactDescriptions[getRandomInt(2)]} React concepts you will need for almost any app you are */}
-        {description} React concepts you will need for almost any app you are
-        going to build!
-      </p>
-    </header>
-  );
-}
-
-// Props are the values passed to the component
-// They help to make the component reusable
-// Props are passed as attributes to the component
-// Props are passed as an object to the component
-// props can be named anything, but it's a convention to name it props
-// Object destructuring is used to extract the values from the object
-// Object destructuring is a javascript feature
-// export function CoreConcept(props) {
-//   return (
-//     <li>
-//       <img src={props.image} alt="Stylized atom" />
-//       <h3>{props.title}</h3>
-//       <p>{props.description}</p>
-//     </li>
-//   );
-// }
-
-// Along with above function, this is also a valid way to write the function
-export function CoreConcept({ image, title, description }) {
-  return (
-    <li>
-      <img src={image} alt="Stylized atom" />
-      <h3>{title}</h3>
-      <p>{description}</p>
-    </li>
   );
 }
 
