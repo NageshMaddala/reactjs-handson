@@ -17,11 +17,14 @@
 // It is invoked when the button is clicked
 // It is passed as a prop to the TabButton component
 // Basically we are passing function pointer
-export default function TabButton({ children, onSelect }) {
-    console.log("TabButton component rendered");
+export default function TabButton({ children, onSelect, isSelected }) {
+  console.log("TabButton component rendered");
   return (
     <li>
-      <button onClick={onSelect}>{children}</button>
+      {/* className is react specific to set the class */}
+      <button className={isSelected ? "active" : undefined} onClick={onSelect}>
+        {children}
+      </button>
     </li>
   );
 }
