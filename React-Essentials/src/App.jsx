@@ -1,5 +1,6 @@
 import reactImg from "./assets/react-core-concepts.png";
 import componentsImg from "./assets/components.png";
+import { CORE_CONCEPTS } from "./data.js";
 
 export const userData = {
   firstName: "Nagesh", // feel free to replace the name value
@@ -47,12 +48,25 @@ function Header() {
 // Props are passed as attributes to the component
 // Props are passed as an object to the component
 // props can be named anything, but it's a convention to name it props
-export function CoreConcept(props) {
+// Object destructuring is used to extract the values from the object
+// Object destructuring is a javascript feature
+// export function CoreConcept(props) {
+//   return (
+//     <li>
+//       <img src={props.image} alt="Stylized atom" />
+//       <h3>{props.title}</h3>
+//       <p>{props.description}</p>
+//     </li>
+//   );
+// }
+
+// Along with above function, this is also a valid way to write the function
+export function CoreConcept({ image, title, description }) {
   return (
     <li>
-      <img src={props.img} alt="Stylized atom" />
-      <h3>{props.title}</h3>
-      <p>{props.description}</p>
+      <img src={image} alt="Stylized atom" />
+      <h3>{title}</h3>
+      <p>{description}</p>
     </li>
   );
 }
@@ -75,25 +89,17 @@ function App() {
           <h2>Core Concepts</h2>
           <ul>
             <CoreConcept
-              title="Components"
-              description="The core UI building block.."
-              img={componentsImg}
+              title={CORE_CONCEPTS[0].title}
+              description={CORE_CONCEPTS[0].description}
+              image={CORE_CONCEPTS[0].image}
             />
             <CoreConcept
-              title="Components"
-              description="The core UI building block.."
-              img={componentsImg}
+              title={CORE_CONCEPTS[1].title}
+              description={CORE_CONCEPTS[1].description}
+              image={CORE_CONCEPTS[1].image}
             />
-            <CoreConcept
-              title="Components"
-              description="The core UI building block.."
-              img={componentsImg}
-            />
-            <CoreConcept
-              title="Components"
-              description="The core UI building block.."
-              img={componentsImg}
-            />
+            <CoreConcept {...CORE_CONCEPTS[2]} />
+            <CoreConcept {...CORE_CONCEPTS[3]} />
           </ul>
         </section>
         <User />
