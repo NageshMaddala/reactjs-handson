@@ -1,14 +1,18 @@
+// below is called react hooks
+// they are used to manage state in functional components
+import { useState } from "react";
+
 import componentsImg from "./assets/components.png";
 import Header from "./components/Header/Header.jsx";
 import CoreConcept from "./components/CoreConcept.jsx";
 import { CORE_CONCEPTS } from "./data.js";
+import TabButton from "./components/TabButton.jsx";
 
 export const userData = {
   firstName: "Nagesh", // feel free to replace the name value
   lastName: "Maddala", // feel free to replace the name value
   title: "Developer", // feel free to replace the title value
 };
-
 
 export function User() {
   return (
@@ -31,6 +35,28 @@ export function User() {
 // All built in components are lower case letters, othewise there will be collision
 // To distinguish between built in components and user defined components capital letters are used
 function App() {
+  // useState is a hook that allows you to manage state in functional components
+  // This must be called at the top level of functional component
+
+  // This is a hook that allows you to manage state in functional components
+  // selectedTopic is a state variable that holds the current selected topic
+  // Initially it is set to "Please click a button"
+  // When the button is clicked, the state variable is updated to the selected topic
+  // It's value is set via setSelectedTopic function internally
+  const [selectedTopic, setSelectedTopic] = useState("Please click a button");
+
+  // let tabContent = 'Please select a tab to see the content';
+
+  function handleSelect(selectedButton) {
+    // selectedButton could be "Components", "JSX", "Props", "State"
+    // console.log(`Selected button: ${selectedButton}`);
+    // tabContent = selectedButton;
+    setSelectedTopic(selectedButton);
+    console.log(selectedTopic);
+  }
+
+  console.log('App component rendered');
+
   return (
     <div>
       <Header />
@@ -52,7 +78,18 @@ function App() {
             <CoreConcept {...CORE_CONCEPTS[3]} />
           </ul>
         </section>
-        <User />
+        <section id="examples">
+          <h2>Examples</h2>
+          <menu>
+            <TabButton onSelect={() => handleSelect("components")}>
+              Components
+            </TabButton>
+            <TabButton onSelect={() => handleSelect("jsx")}>JSX</TabButton>
+            <TabButton onSelect={() => handleSelect("props")}>Props</TabButton>
+            <TabButton onSelect={() => handleSelect("state")}>State</TabButton>
+          </menu>
+          {selectedTopic}
+        </section>
       </main>
     </div>
   );
