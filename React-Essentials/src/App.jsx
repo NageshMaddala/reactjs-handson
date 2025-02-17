@@ -1,6 +1,6 @@
 // below is called react hooks
 // they are used to manage state in functional components
-import { useState } from "react";
+import { useState, Fragment } from "react";
 
 import componentsImg from "./assets/components.png";
 import Header from "./components/Header/Header.jsx";
@@ -75,7 +75,12 @@ function App() {
   }
 
   return (
-    <div>
+    // <div>
+    // Fragment is a wrapper component that does not add any extra node to the DOM
+    // It is used to group multiple elements without adding extra nodes to the DOM
+    // It is used to return multiple elements from a component
+    // There is shorter alternatve to use Fragment, just use empty tag <> </> 
+    <Fragment>
       <Header />
       <main>
         <section id="core-concepts">
@@ -91,7 +96,7 @@ function App() {
 
           <ul>
             {/* key prop is used to identify each element in the array */}
-            
+
             {CORE_CONCEPTS.map((conceptItem) => (
               <CoreConcept key={conceptItem.title} {...conceptItem} />
             ))}
@@ -152,7 +157,9 @@ function App() {
           {tabContent}
         </section>
       </main>
-    </div>
+    </Fragment>
+
+    // </div>
   );
 }
 
