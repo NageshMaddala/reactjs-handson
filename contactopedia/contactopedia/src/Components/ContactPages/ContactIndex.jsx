@@ -38,6 +38,8 @@ class ContactIndex extends React.Component {
           isFavorite: true,
         },
       ],
+      selectedContact: undefined,
+      isUpdating: false,
     };
   }
 
@@ -82,7 +84,89 @@ class ContactIndex extends React.Component {
         contactList: prevState.contactList.concat(newFinalContact),
       }));
     }
-    return { status: "success", msg: "Contact was Added Successfully" };  
+    return { status: "success", msg: "Contact was Added Successfully" };
+  };
+
+  handleUpdateContact = (updateContact) => {
+    console.log("Update Contact", updateContact);
+    if (updateContact.name === "") {
+      return { status: "failure", msg: "Please Enter a valid Name" };
+    } else if (updateContact.phone === "") {
+      return { status: "failure", msg: "Please Enter a valid Phone" };
+    }
+
+    this.setState((prevState) => ({
+      contactList: prevState.contactList.map((obj) => {
+        if (obj.id === updateContact.id) {
+          return {
+            ...obj,
+            name: updateContact.name,
+            email: updateContact.email,
+            phone: updateContact.phone,
+          };
+        }
+        return obj;
+      }),
+      isUpdating: false,
+      selectedContact: undefined, // reset the selected contact
+    }));
+    return { status: "success", msg: "Contact was updated Successfully" };
+  };
+
+  handleToggleFavorite = (contact) => {
+    const updatedContact = {
+      ...contact,
+      isFavorite: !contact.isFavorite,
+    };
+
+    const updatedContactList = this.state.contactList.map((c) =>
+      c.id === contact.id ? updatedContact : c
+    );
+
+    this.setState({ contactList: updatedContactList });
+  };
+
+  handleDeleteContact = (contact) => {
+    console.log("Delete Contact", contact);
+    const updatedContactList = this.state.contactList.filter(
+      (c) => c.id !== contact.id
+    );
+
+    this.setState({ contactList: updatedContactList });
+  };
+
+  handleRandomContact = (newContact) => {
+    const newFinalContact = {
+      ...newContact, // spread operator is used to copy the properties of newContact object
+      id: this.state.contactList[this.state.contactList.length - 1].id + 1,
+      isFavorite: false,
+    };
+
+    this.setState((prevState) => ({
+      contactList: prevState.contactList.concat(newFinalContact),
+    }));
+  };
+
+  handleRemmoveAllContact = () => {
+    this.setState((prevState) => ({
+      contactList: [],
+    }));
+  };
+
+  handleUpdateClick = (contact) => {
+    console.log("Update Contact", contact);
+    this.setState({
+      selectedContact: contact,
+      isUpdating: true,
+    });
+  };
+
+  handleCancelUpdateContact = (contact) => {
+    console.log("Cancel Contact", contact);
+    this.setState({
+      selectedContact: undefined,
+      isUpdating: false,
+    });
   };
 
   render() {
@@ -91,15 +175,25 @@ class ContactIndex extends React.Component {
         <Header />
         <div className="container" style={{ minHeight: "85vh" }}>
           <div className="row py-3">
-            <div className="col-4 offset-2">
-              <AddRandomContact />
+            <div className="col-4 offset-2 row">
+              <AddRandomContact
+                handleRandomContact={this.handleRandomContact}
+              />
             </div>
-            <div className="col-4">
-              <RemoveAllContact />
+            <div className="col-4 row">
+              <RemoveAllContact
+                handleRemmoveAllContact={this.handleRemmoveAllContact}
+              />
             </div>
             <div className="row py-2">
               <div className="col-8 offset-2 row">
-                <AddContact handleAddContact={this.handleAddContact} />
+                <AddContact
+                  isUpdating={this.state.isUpdating}
+                  selectedContact={this.state.selectedContact}
+                  handleAddContact={this.handleAddContact}
+                  cancelUpdateContact={this.handleCancelUpdateContact}
+                  handleUpdateContact={this.handleUpdateContact}
+                />
               </div>
             </div>
             <div className="row py-2">
@@ -108,6 +202,9 @@ class ContactIndex extends React.Component {
                   contacts={this.state.contactList.filter(
                     (c) => c.isFavorite === true
                   )}
+                  favoriteClick={this.handleToggleFavorite}
+                  deleteContact={this.handleDeleteContact}
+                  updateClick={this.handleUpdateClick}
                 />
               </div>
             </div>
@@ -117,6 +214,9 @@ class ContactIndex extends React.Component {
                   contacts={this.state.contactList.filter(
                     (c) => c.isFavorite === false
                   )}
+                  favoriteClick={this.handleToggleFavorite}
+                  deleteContact={this.handleDeleteContact}
+                  updateClick={this.handleUpdateClick}
                 />
               </div>
             </div>
