@@ -1,3 +1,4 @@
 1. Created react project using below command
     npx create-react-app cyclopedia
 2. Cleaned up all the directories, basically removed the files that are not required
+3. Focus in this project, is to understand class based component and the lifecyle method that within the class based component
