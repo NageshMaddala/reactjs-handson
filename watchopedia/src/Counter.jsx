@@ -24,23 +24,35 @@ const Counter = () => {
   //   const [counter, setCounter] = useState(10);
   // Below code makes sure the initial value is set to 10 only once
   // Alwaus use array function syntax to initialize state
-  const [counter, setCounter] = useState(() => {
-    return 10;
+  // Below sample uses an object to store the counter state
+  const [counterState, setCounterState] = useState(() => {
+    return { counter: 10, title: "Fun" };
   });
 
+  const [titleState, setTitleState] = useState("This title is set from a separate state");
+
   function incrementCounter() {
-    setCounter(counter + 1);
+    setCounterState((prevState) => {
+      return { counter: prevState.counter + 1, title: "Fun" };
+    });
   }
 
   function decrementCounter() {
     // Always use the previous state value to update the state
-    setCounter((prevState) => prevState - 1);
-    setCounter((prevState) => prevState - 1);
+    setCounterState((prevState) => {
+      // use spread operator to copy the previous state
+      // and then update the counter value
+      return { ...prevState, counter: prevState.counter - 1 };
+    });
   }
 
   return (
-    <div className="col-12 col-md-3 offset-md-4 border text-white">
-      <span className="h2 pt-4 m-2 text-white-50">Fun Counter</span>
+    <div className="col-12 col-md-5 offset-md-4 border text-white">
+      <span className="h2 pt-4 m2 text-white-50">{titleState}</span>
+      <br />
+      <span className="h2 pt-4 m-2 text-white-50">
+        {counterState.title} Counter
+      </span>
       <button className="btn btn-success m-1" onClick={incrementCounter}>
         +1
       </button>
@@ -50,7 +62,7 @@ const Counter = () => {
       <br />
       <span className="h4">
         Counter: &nbsp;
-        <span className="text-primary">{counter}</span>
+        <span className="text-primary">{counterState.counter}</span>
       </span>
     </div>
   );
