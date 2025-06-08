@@ -8,6 +8,7 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 import { resetDestination } from "./destinationSlice";
+import { resetReduxOPedia } from "../action/actions";
 
 // This is an object, we can have multiple properties in this object
 // Each property can be a different part of the state
@@ -63,7 +64,10 @@ export const counterSlice = createSlice({
         // magic strings are bad and should be avoided
         builder.addCase(resetDestination.toString(), (state, action) => {
             state.count = 10;
-        })
+        });
+        builder.addCase(resetReduxOPedia.toString(), (state, action) => {
+            state.count = 100;
+        });
     }
 });
 

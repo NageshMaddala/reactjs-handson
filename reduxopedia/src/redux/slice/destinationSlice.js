@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { resetReduxOPedia } from "../action/actions";
 
 const initialState = () => {
     return {
@@ -56,6 +57,11 @@ export const destinationSlice = createSlice({
             }
         },
     },
+    extraReducers: (builder) => {
+        builder.addCase(resetReduxOPedia.toString(), (state, action) => {
+            state.destinationSelected = null;
+        });
+    }
 });
 
 export const destinationReducer = destinationSlice.reducer; // Exporting the reducer so that it can be used in the store
