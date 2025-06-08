@@ -7,6 +7,7 @@
 // A state is an object that contains the data for the application.
 
 import { createSlice } from "@reduxjs/toolkit";
+import { resetDestination } from "./destinationSlice";
 
 // This is an object, we can have multiple properties in this object
 // Each property can be a different part of the state
@@ -58,6 +59,12 @@ export const counterSlice = createSlice({
             state.count = 10;
         },
     },
+    extraReducers: (builder) => {
+        // magic strings are bad and should be avoided
+        builder.addCase(resetDestination.toString(), (state, action) => {
+            state.count = 10;
+        })
+    }
 });
 
 export const { increment, decrement, reset, incrementMultiplier, decrementMultiplier, resetMultiplier } = counterSlice.actions;
