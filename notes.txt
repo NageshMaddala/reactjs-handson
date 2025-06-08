@@ -19,3 +19,10 @@ It could be name of variable or name of the function
 - Default Export
 - This is to export the value without the name
 
+-- command to create a redux project 
+-- npx create-react-app reduxopedia
+
+-- readux toolkit is recommended way to install react redux
+-- previously there were 2 versions for reducx, react-redux and reedux-toolkit
+-- now preferred one is redux toolkit
+-- https://redux-toolkit.js.org
