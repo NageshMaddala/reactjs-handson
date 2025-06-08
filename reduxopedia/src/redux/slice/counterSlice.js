@@ -39,7 +39,7 @@ export const counterSlice = createSlice({
             state.count -= 1;
         },
         reset: (state) => {
-            state.count = 0;
+            state.count = 10;
         },
         decrementMultiplier: (state, action) => {
             // This action can be used to decrement the count by a multiplier

@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 // import counterReducer from "./slice/counterSlice";
 import { counterReducer } from "./slice/counterSlice";
+import { destinationReducer } from "./slice/destinationSlice";
 
 // Multiple stores can be created but it is not recommended
 // as it can lead to complex state management issues.
@@ -16,6 +17,7 @@ import { counterReducer } from "./slice/counterSlice";
 export const store = configureStore({
     reducer: {
         counterStore: counterReducer, // The key is the name of the slice, and the value is the reducer for that slice
+        destinationStore: destinationReducer
     }
 });
 
