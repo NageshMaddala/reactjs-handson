@@ -1,5 +1,6 @@
 import React from "react";
 import AddDestination from "./AddDestination";
+import DestinationList from "./DestinationList";
 
 function DestinationIndex() {
   return (
@@ -11,7 +12,8 @@ function DestinationIndex() {
         >
           Travel List
         </h1>
-        <AddDestination></AddDestination>
+        <AddDestination/>
+        <DestinationList/>
       </div>
     </div>
   );
