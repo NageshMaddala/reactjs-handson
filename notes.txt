@@ -34,3 +34,11 @@ It could be name of variable or name of the function
 -- www.npmjs.com/package/json-server
 
 -- createApi along with fetchBaseQuery, is the api provided by the react toolkit to make external api calls
+
+RTK Query
+
+Query - used to fetch data (Get/GetAll)
+Mutation - used to update data (Create/Update/Delete)
+
+Tags - are responsible for invoking related queries or mutations 
+they are kind of a chain or call back setup 

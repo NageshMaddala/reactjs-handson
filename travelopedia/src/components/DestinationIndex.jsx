@@ -12,8 +12,8 @@ function DestinationIndex() {
         >
           Travel List
         </h1>
-        <AddDestination/>
-        <DestinationList/>
+        <AddDestination />
+        <DestinationList />
       </div>
     </div>
   );
