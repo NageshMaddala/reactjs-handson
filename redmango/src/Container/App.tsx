@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 // Importing the Header and Footer components from the Layout directory
 // This will allow us to use these components in the App component
@@ -10,6 +10,9 @@ import React from 'react';
 // import Footer from '../Components/Layout/Footer';
 
 import { Header, Footer } from '../Components/Layout';
+import { menuItemModel } from '../Interfaces';
+import { Home } from '../Pages';
+
 
 // Once the files are imported here
 // These will be available accross the entire application
@@ -20,7 +23,7 @@ function App() {
   return (
     <div>
       <Header />
-      Main Content
+      <Home />
       <Footer />
     </div>
   );
