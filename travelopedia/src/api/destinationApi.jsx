@@ -3,6 +3,15 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const destinationApi = createApi({
   reducerPath: "destinationApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5001/" }),
+  // tagTypes declare the types of tags used in the API
+  // Tags are used to manage cache and refetching
+  // In this case, we are using "Destinations" as a tag type
+  // This allows us to invalidate the cache for Destinations
+  // when a mutation occurs (like adding, updating, or deleting a destination)
+  // This is a key feature of RTK Query that helps in managing cache
+  // and refetching data automatically
+  // It helps in keeping the UI in sync with the server state
+  // and ensures that the latest data is displayed
   tagTypes: ["Destinations"], // Tags are used to manage cache and refetching
   // This tag will be used to invalidate the cache for Destinations
   endpoints: (builder) => ({
