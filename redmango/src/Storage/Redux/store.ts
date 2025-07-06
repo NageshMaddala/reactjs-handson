@@ -3,6 +3,7 @@ import { menuItemReducer } from "./menuItemSlice";
 
 // Importing rtk query API slice
 import { menuItemApi } from "../../Apis"; // Importing the menuItemApi for API calls
+import { shoppingCartApi } from "../../Apis"; // Importing the shoppingCartApi for shopping cart management
 
 const store = configureStore({
     reducer: {
@@ -13,13 +14,16 @@ const store = configureStore({
         // This is used to manage the state of menu items in the application
 
         [menuItemApi.reducerPath]: menuItemApi.reducer, // Adding the rtk query API slice to the store
+        [shoppingCartApi.reducerPath]: shoppingCartApi.reducer, // Adding the shopping cart API slice to the store
     },
     // Adding the rtk query API middleware to the store
     // This is used to manage the state of menu items in the application
     // The middleware is responsible for handling the API calls and caching the results
     // It is used to manage the state of menu items in the application
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware().concat(menuItemApi.middleware), // Adding the rtk query API middleware to the store
+        getDefaultMiddleware()
+            .concat(menuItemApi.middleware) // Adding the rtk query API middleware to the store
+            .concat(shoppingCartApi.middleware), // Adding the shopping cart API middleware to the store
 });
 
 // RootState type for use in selectors

@@ -3,7 +3,9 @@ import { useParams } from 'react-router-dom';
 import { useGetMenuItemByIdQuery } from '../Apis/menuItemApi';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { useUpdateShoppingCartMutation } from '../Apis/shoppingCartApi';
 
+// UserID - f62ea628-a6e4-4d61-97e5-e9748d6fa3ff
 function MenuItemDetails() {
     // Using Redux Toolkit Query to fetch a single menu item by ID
     // This will automatically fetch the menu item data based on the ID from the URL
@@ -12,6 +14,28 @@ function MenuItemDetails() {
     const navigate = useNavigate();
 
     const [quantity, setQuantity] = useState(1);
+
+    const [isAddingToCart, setIsAddingToCart] = useState<boolean>(false);
+    const [updateShoppingCart] = useUpdateShoppingCartMutation();
+
+    const handleAddToCart = async (menuItemId: number) => {
+        setIsAddingToCart(true);
+        try {
+            // Call the updateShoppingCart mutation with the menuItemId and quantity
+            //await updateShoppingCart({ menuItemId, quantity }).unwrap();
+            const response = await updateShoppingCart({
+                menuItemId: menuItemId,
+                updateQuantityBy: quantity,
+                userId: "f62ea628-a6e4-4d61-97e5-e9748d6fa3ff" // Replace with actual user ID
+            });
+            console.log("Item added to cart successfully:", response);
+
+        } catch (error) {
+            console.error("Failed to add item to cart:", error);
+        } finally {
+            setIsAddingToCart(false);
+        }
+    }
 
     // We can also do conditional rendering based on the loading state
     // If the data is still being fetched, we can show a loading message
@@ -76,7 +100,8 @@ function MenuItemDetails() {
                     </span>
                     <div className="row pt-4">
                         <div className="col-5">
-                            <button className="btn btn-success form-control">
+                            <button className="btn btn-success form-control"
+                                onClick={() => handleAddToCart(data.result?.id)}>
                                 Add to Cart
                             </button>
                         </div>
