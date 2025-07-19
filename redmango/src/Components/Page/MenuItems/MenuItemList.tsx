@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { menuItemModel } from '../../../../Interfaces';
+import { menuItemModel } from '../../../Interfaces';
 import MenuItemCard from './MenuItemCard';
 import { useDispatch } from 'react-redux';
-import { useGetMenuItemsQuery } from '../../../../Apis/menuItemApi';
-import { setMenuItem } from '../../../../Storage/Redux/menuItemSlice';
-import { MainLoader } from '../../../../Pages/Common';
+import { useGetMenuItemsQuery } from '../../../Apis/menuItemApi';
+import { setMenuItem } from '../../../Storage/Redux/menuItemSlice';
+import { MainLoader } from '../../../Pages/Common';
 
 function MenuItemList() {
 

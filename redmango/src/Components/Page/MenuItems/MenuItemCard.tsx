@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { menuItemModel } from '../../../../Interfaces'
+import { menuItemModel } from '../../../Interfaces'
 import { Link } from 'react-router-dom';
-import { useUpdateShoppingCartMutation } from '../../../../Apis/shoppingCartApi';
-import { MiniLoader } from '../../../../Pages/Common';
+import { useUpdateShoppingCartMutation } from '../../../Apis/shoppingCartApi';
+import { MiniLoader } from '../../../Pages/Common';
 
 interface Props {
     menuItem: menuItemModel;
