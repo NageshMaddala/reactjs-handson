@@ -4,7 +4,7 @@ import { useGetMenuItemByIdQuery } from '../Apis/menuItemApi';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useUpdateShoppingCartMutation } from '../Apis/shoppingCartApi';
-import { MainLoader, MiniLoader } from './Common';
+import { MainLoader, MiniLoader } from '../Components/Page/Common';
 
 // UserID - f62ea628-a6e4-4d61-97e5-e9748d6fa3ff
 function MenuItemDetails() {
