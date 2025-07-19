@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { cartItemModel } from '../../../Interfaces';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../Storage/Redux/store';
+import { inputHelper } from '../../../Helper';
+import { MiniLoader } from '../Common';
 
 function CartPickUpDetails() {
+
+    const [loading, setLoading] = useState(false);
 
     const shoppingCartFromStore: cartItemModel[] = useSelector(
         (state: RootState) => state.shoppingCartStore.cartItems ?? []);
@@ -11,11 +15,30 @@ function CartPickUpDetails() {
     let grandTotal = 0;
     let totalItems = 0;
 
+    // Below is easy way to manage control component    
+    const initialUserData = {
+        name: "",
+        email: "",
+        phoneNumber: ""
+    };
+
     shoppingCartFromStore?.map((cartItem: cartItemModel) => {
         totalItems += cartItem.quantity ?? 0;
         grandTotal += (cartItem.menuItem?.price ?? 0) * (cartItem.quantity ?? 0);
         return null;
     });
+
+    const [userInput, setUserInput] = useState(initialUserData);
+
+    const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const tempData = inputHelper(e, userInput);
+        setUserInput(tempData);
+    }
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setLoading(true);
+    }
 
     return (
         <div className="border pb-5 pt-3">
@@ -23,14 +46,16 @@ function CartPickUpDetails() {
                 Pickup Details
             </h1>
             <hr />
-            <form className="col-10 mx-auto">
+            <form className="col-10 mx-auto" onSubmit={handleSubmit}>
                 <div className="form-group mt-3">
                     Pickup Name
                     <input
                         type="text"
+                        value={userInput.name}
                         className="form-control"
                         placeholder="name..."
                         name="name"
+                        onChange={handleUserInput}
                         required
                     />
                 </div>
@@ -38,9 +63,11 @@ function CartPickUpDetails() {
                     Pickup Email
                     <input
                         type="email"
+                        value={userInput.email}
                         className="form-control"
                         placeholder="email..."
                         name="email"
+                        onChange={handleUserInput}
                         required
                     />
                 </div>
@@ -49,9 +76,11 @@ function CartPickUpDetails() {
                     Pickup Phone Number
                     <input
                         type="number"
+                        value={userInput.phoneNumber}
                         className="form-control"
                         placeholder="phone number..."
                         name="phoneNumber"
+                        onChange={handleUserInput}
                         required
                     />
                 </div>
@@ -64,8 +93,9 @@ function CartPickUpDetails() {
                 <button
                     type="submit"
                     className="btn btn-lg btn-success form-control mt-3"
+                    disabled={loading}
                 >
-                    Looks Good? Place Order!
+                    {loading ? <MiniLoader /> : "Looks Good? Place Order!"}
                 </button>
             </form>
         </div>
