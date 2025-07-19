@@ -4,10 +4,12 @@ import { menuItemReducer } from "./menuItemSlice";
 // Importing rtk query API slice
 import { menuItemApi } from "../../Apis"; // Importing the menuItemApi for API calls
 import { shoppingCartApi } from "../../Apis"; // Importing the shoppingCartApi for shopping cart management
+import { shoppingCartReducer } from "./shoppingCartSlice";
 
 const store = configureStore({
     reducer: {
-        menuItemReducer: menuItemReducer,
+        shoppingCartStore: shoppingCartReducer, // Registering the shopping cart reducer
+        menuItemStore: menuItemReducer,
         // after registering the reducer, we can use the state in our components
         // This is used to manage the state of menu items in the application
         // We also need to add middleware for the rtk query API slice

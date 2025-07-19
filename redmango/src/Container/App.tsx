@@ -11,8 +11,11 @@ import React, { useEffect, useState } from 'react';
 
 import { Header, Footer } from '../Components/Layout';
 import { menuItemModel } from '../Interfaces';
-import { Home, MenuItemDetails, NotFound } from '../Pages';
+import { Home, MenuItemDetails, NotFound, ShoppingCart } from '../Pages';
 import { Routes, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useGetShoppingCartQuery } from '../Apis/shoppingCartApi';
+import { setShoppingCart } from '../Storage/Redux/shoppingCartSlice';
 
 // Once the files are imported here
 // These will be available accross the entire application
@@ -20,6 +23,17 @@ import { Routes, Route } from 'react-router-dom';
 // Or they can be added in index.tsx too because the app.tsx is available there
 
 function App() {
+
+  const dispatch = useDispatch();
+  const { data, isLoading } = useGetShoppingCartQuery("f62ea628-a6e4-4d61-97e5-e9748d6fa3ff");
+
+  useEffect(() => {
+    if (!isLoading) {
+      console.log("Shopping Cart Data:", data.result);
+      dispatch(setShoppingCart(data.result?.cartItems));
+    }
+  }, [data]);
+
   return (
     <div>
       <Header />
@@ -36,6 +50,7 @@ function App() {
           <Route
             path="/menuItemDetails/:menuItemId"
             element={<MenuItemDetails />}></Route>
+          <Route path="/shoppingCart" element={<ShoppingCart />}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes>
       </div>

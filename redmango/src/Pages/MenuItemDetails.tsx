@@ -4,6 +4,7 @@ import { useGetMenuItemByIdQuery } from '../Apis/menuItemApi';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useUpdateShoppingCartMutation } from '../Apis/shoppingCartApi';
+import { MainLoader, MiniLoader } from './Common';
 
 // UserID - f62ea628-a6e4-4d61-97e5-e9748d6fa3ff
 function MenuItemDetails() {
@@ -45,7 +46,7 @@ function MenuItemDetails() {
 
     if (isLoading) {
         return <div className="d-flex justify-content-center"
-            style={{ width: "100%" }}>Loading...</div>; // Display a loading message while data is being fetched
+            style={{ width: "100%" }}><MainLoader /></div>; // Display a loading message while data is being fetched
     }
 
     console.log(data);
@@ -58,6 +59,15 @@ function MenuItemDetails() {
         setQuantity(newQuantity);
         return;
     }
+
+    // if (isLoading)
+    //     return (<div> Loading..
+    //     </div>);
+
+    if (isLoading)
+        return (<div className="d-flex justify-content-center" style={{ width: "100%" }}>
+            <MainLoader />
+        </div>);
 
     return (
         <div className="container pt-4 pt-md-5">
@@ -100,12 +110,15 @@ function MenuItemDetails() {
                     </span>
                     <div className="row pt-4">
                         <div className="col-5">
-                            <button className="btn btn-success form-control"
-                                onClick={() => handleAddToCart(data.result?.id)}>
-                                Add to Cart
+                            {isAddingToCart ? (<button disabled className="btn btn-success form-control">
+                                <MiniLoader />
                             </button>
-                        </div>
-
+                            ) : (
+                                <button className="btn btn-success form-control"
+                                    onClick={() => handleAddToCart(data.result?.id)}>
+                                    Add to Cart
+                                </button>
+                            )}</div>
                         <div className="col-5 ">
                             <button className="btn btn-secondary form-control"
                                 onClick={() => navigate(-1)}>
