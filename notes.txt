@@ -42,3 +42,5 @@ Mutation - used to update data (Create/Update/Delete)
 
 Tags - are responsible for invoking related queries or mutations 
 they are kind of a chain or call back setup 
+
+Controlled Components provide the ability for 2 way binding

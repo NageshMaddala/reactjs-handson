@@ -2,9 +2,10 @@ import { configureStore } from "@reduxjs/toolkit";
 import { menuItemReducer } from "./menuItemSlice";
 
 // Importing rtk query API slice
-import { menuItemApi } from "../../Apis"; // Importing the menuItemApi for API calls
+import { authApi, menuItemApi } from "../../Apis"; // Importing the menuItemApi for API calls
 import { shoppingCartApi } from "../../Apis"; // Importing the shoppingCartApi for shopping cart management
 import { shoppingCartReducer } from "./shoppingCartSlice";
+import { userAuthReducer } from "./userAuthSlice";
 
 const store = configureStore({
     reducer: {
@@ -14,9 +15,11 @@ const store = configureStore({
         // This is used to manage the state of menu items in the application
         // We also need to add middleware for the rtk query API slice
         // This is used to manage the state of menu items in the application
+        userAuthStore: userAuthReducer,
 
         [menuItemApi.reducerPath]: menuItemApi.reducer, // Adding the rtk query API slice to the store
         [shoppingCartApi.reducerPath]: shoppingCartApi.reducer, // Adding the shopping cart API slice to the store
+        [authApi.reducerPath]: authApi.reducer
     },
     // Adding the rtk query API middleware to the store
     // This is used to manage the state of menu items in the application
@@ -25,7 +28,8 @@ const store = configureStore({
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware()
             .concat(menuItemApi.middleware) // Adding the rtk query API middleware to the store
-            .concat(shoppingCartApi.middleware), // Adding the shopping cart API middleware to the store
+            .concat(authApi.middleware)
+            .concat(shoppingCartApi.middleware) // Adding the shopping cart API middleware to the store
 });
 
 // RootState type for use in selectors
