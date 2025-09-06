@@ -1,0 +1,4 @@
+EntityFramework Commands
+
+add-migration initialMigration
+

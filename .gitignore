@@ -1,3 +1,6 @@
 node_modules
 .DS_Store
 redmango/importantnotes.txt
+/RedMango_API/.vs/RedMango_API
+/RedMango_API/RedMango_API/bin/Debug/net7.0
+/RedMango_API/RedMango_API/obj
